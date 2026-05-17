@@ -1,0 +1,32 @@
+Design and implement a Splitwise System that allows users to split expenses among groups and individuals. 
+The system should handle expense tracking, balance calculations, and settlement of debts between users.
+
+Core Entities:
+Splitwise Controller:
+List<Groups>, List<Expense>, List<User>
+createGroup();
+addExpense();
+addUser();
+getBalance();
+settleExpense();
+
+Expense: ExpenseId, ExpenseAmount, User paidBy, List<User> paidTo, SplitType 
+getAmount();
+getPaidBy();
+
+Group: GroupId, List<Expense>, List<User>
+getExpenses();
+addUser();
+removeUser();
+addExpense();
+
+User: UserId, Map<User, Double> balances;
+getBalance();
+addBalance();
+subtractBalance();
+
+
+Transaction: TransactionId, User from_user, User to_user, double Amount
+execute();
+
+SplitType: EQUAL, EXACT, PERCENTAGE

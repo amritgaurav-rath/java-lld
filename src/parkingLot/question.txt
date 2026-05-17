@@ -35,3 +35,35 @@ List<Tickets>;
 - issueTicket(slotId, floorNo,vehicle, occupiedStartTs); ->ticketId
 - pricingStrategy.checkoutTicket(floorNo,slotId);
 - checkOutTicket(ticketId) // print the price and checkout the vehicle
+
+
+Tickets:
+- ticketId
+- slotId(FK)
+- vehicleId(FK)
+- TicketEnum
+- occupiedStartTs
+- endTs
+- totalPrice
+
+select * from tickets where vehicleId = "id" and TicketEnum==PARKED
+index of vehicleId,TicketEnum
+
+Vehicle:
+- vehicleId UUID
+- vehicleNo
+- vehicleType
+
+Slots:
+- id UUID
+- slotId
+- floorId
+- allowedVehicleType
+- SlotState
+- vehicleId(FK)
+
+index on slotId,floorId
+index on floorId,allowedVehicleType,slotState
+
+How to have no multiple active tickets for vehicle:
+CREATE UNIQUE INDEX unique_index_tickets ON tickets(vehicleId) WHERE TicketStatus = "PARKED";
