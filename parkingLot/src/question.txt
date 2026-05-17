@@ -1,0 +1,37 @@
+You are required to design a Parking Lot system for a mall.
+
+The parking lot can have multiple floors, and each floor contains multiple parking spots of different types.
+The system should support the following features:
+
+Requirements:
+Vehicles can enter the parking lot and get a parking ticket.
+Vehicles can exit the parking lot and the system should calculate the parking fee.
+The parking lot supports different vehicle types:
+Bike
+Car
+Truck
+Different parking spot types exist for different vehicles.
+The system should assign the nearest available parking spot to a vehicle.
+The parking lot should display the number of available spots on each floor.
+The system should prevent parking when no suitable spot is available.
+
+Lets create the core entities first:
+Floor: floorNo, List<Slots>
+Slot: slotId, vehicleId, allocatedSlotType: vehicleType, SlotState AVAILABLE | OCCUPIED 
+vehicleType: BIKE, CAR, TRUCK
+ticket: ticketId, slotId, vehicleId, TicketStatus(Enum): IN_PARKING | CHECKED_OUT, int occupiedStartTs, totalAmount
+vehicle: vehicleId, vehicleNo, vehicleType
+
+PricingStrategy: 
+- NormalPricingStrategy: i.e. based on vehicleType, Bike-10,Car-20,Truck-30
+
+GetSlotStrategy:
+- NearestSlotStrategy: gets nearest slot strategy
+
+ParkingController:
+List<Floors>,
+List<Tickets>;
+- getSlotStrategy.getSlotForVehicleType(List<Integer> floorNo, vehicleType); -> floorNo,slotId
+- issueTicket(slotId, floorNo,vehicle, occupiedStartTs); ->ticketId
+- pricingStrategy.checkoutTicket(floorNo,slotId);
+- checkOutTicket(ticketId) // print the price and checkout the vehicle
