@@ -1,0 +1,46 @@
+Design a coffee vending machine that:
+
+Requirements
+The coffee vending machine should support different types of coffee, such as espresso, cappuccino, and latte.
+Each type of coffee should have a specific price and recipe (ingredients and their quantities).
+The machine should have a menu to display the available coffee options and their prices.
+Users should be able to select a coffee type and make a payment.
+The machine should dispense the selected coffee and provide change if necessary.
+The machine should track the inventory of ingredients and notify when they are running low.
+
+
+Enums:
+public enum CoffeeType {
+    Latte, 
+    Cappucino, 
+    Black
+}
+public enum Ingredients{
+    Sugar, Milk, CoffeeBeans, Water, Caramel
+} 
+public enum Toppings {
+    Caramel, ExtraSugar
+}
+
+CoffeeFactory:
+createCoffee
+
+Switch (Ingredients) {
+    case black:
+    return Black();
+    case cappuccino:
+    return Cappucino();
+
+    so on;
+}
+
+
+Inventory:
+Map<Ingredients,Integer> stock;// and quantities
+- addStock(IngredientType, quantity)
+stock.put(IngredientType,stock.getOrDefault(IngredientType,0)+quantity)
+
+- deductStock(IngredientType, quantity)
+stock.put(IngredientType,stock.get(IngredientType)+quantity);
+
+- getInventory()

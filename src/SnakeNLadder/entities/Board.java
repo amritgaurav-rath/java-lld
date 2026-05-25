@@ -1,4 +1,4 @@
-package entities;
+package SnakeNLadder.entities;
 import java.util.*;
 
 public class Board {

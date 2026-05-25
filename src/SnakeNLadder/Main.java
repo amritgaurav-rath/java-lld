@@ -1,4 +1,6 @@
-import entities.*;
+package SnakeNLadder;
+
+import SnakeNLadder.entities.*;
 import java.util.*;
 
 public class Main {

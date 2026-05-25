@@ -1,4 +1,4 @@
-package entities;
+package SnakeNLadder.entities;
 
 public abstract class Connector {
     private int start;

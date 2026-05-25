@@ -1,0 +1,65 @@
+Flow in ATM Machine:
+- User comes to atm. -> User, Controller
+- User enters Pin using his card. -> Card -> pin will be identified by card no. number<->pin
+- User will enter amount to withdraw. Cash withdrawals, Balance enquiry
+- Validate if the amount can be withdraw -> if user has X amount in his amount. if yes, proceed, if no, show not possible and reset the machine(Card Eject).
+- At proceeding, dispenser will process the amount in x number of a moneyType A, y number of moneytype B and so on till amount is reached.
+- we will start by processing with moneyType of higher values first, than lower values until we reach the amount.
+
+Core Entities:
+
+ATMController:
+ATMState state;
+
+
+public enum OperationType {
+    WITHDRAW,
+    DEPOSIT,
+    BALANCE_ENQUIRY
+}
+
+ATMState:
+public interface ATMState {
+    void insertCard(ATMController, string cardNumber);
+    void enterPin(ATMController, string pin);
+    void selectOperation(ATMController, OperationType operationType, int value);
+    void ejectCard(ATMController);
+}
+
+BankingSvc:
+public class BankingSvc {
+    Map<String,Card> cardMap;
+    Map<Card,Account> cardAccountRelationMap;
+    Map<String,Account> accounts;
+}
+
+Account:
+public class Account {
+    String accountId;
+    Double balance;
+    Map<String,Card> cardMap;
+}
+
+Card:
+public class Card {
+    String cardNumber;
+    String pin;
+}
+
+CashDispenser: 
+public class CashDispenser {
+    public DispenseChain chain;
+    public boolean canDispenseCash(int cashAmount) {
+
+    }
+
+    public void dispenseCash(int cashAmount) {
+
+    }
+}
+
+public interface DispenseChain {
+    void setNextDispense(DispenseChain dispenseChain);
+    void dispense(int amount);
+    boolean canDispense(int amount);
+}

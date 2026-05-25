@@ -1,4 +1,4 @@
-package entities;
+package SnakeNLadder.entities;
 
 public class Dice {
     private int maxFaces;
